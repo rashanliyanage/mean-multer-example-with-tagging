@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>File Upload Example</title>
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/jquery.steps.css">
+
+    <script src="/vendor/angular.min.js"></script>
+    <script src="/vendor/ng-file-upload-all.min.js"></script>
+    <script src="/javascripts/fileuploadExample.js"></script>
+    <script type="text/javascript" src="/vendor/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="/vendor/jquery.steps.js"></script>
+    <script type="text/javascript" src="/vendor/jquery-validate.js"></script>
+    <script type="text/javascript" src="/javascripts/script.js"></script>
+    <!-- <script type="text/javascript" src="/javascripts/imagePreview.js"></script> -->
+
+
+</head>
+
+
+<body>
+    <div>
+        <img ng-src="" id="imageBox" />
+        <script>
+
+        var tempID = sessionStorage.getItem("tempID");
+        var tempFileName = sessionStorage.getItem("tempFileName");
+        console.log(tempID);
+        console.log(tempFileName);
+
+
+            document.getElementById('imageBox').src = "uploads/" + tempID + "/" + tempFileName;
+        </script>
+    </div>
+</body>
+
+</html>

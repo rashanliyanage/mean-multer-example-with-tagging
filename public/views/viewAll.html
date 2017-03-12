@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>File Upload Example</title>
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/jquery.steps.css">
+
+    <script src="/vendor/angular.min.js"></script>
+    <script src="/vendor/ng-file-upload-all.min.js"></script>
+    <script src="/javascripts/fileuploadExample.js"></script>
+    <!-- <script type="text/javascript" src="/vendor/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="/vendor/jquery.steps.js"></script>
+    <script type="text/javascript" src="/vendor/jquery-validate.js"></script>
+    <script type="text/javascript" src="/javascripts/script.js"></script> -->
+
+
+
+</head>
+
+<body ng-app="fileUpload">
+    <div ng-controller="formCtrl" id="example-form" action="#">
+        <h2>All uploads are here:</h2>
+        <ul>
+            <li ng-repeat="upload in uploads">
+                <p>Penis</p>
+                <p>{{upload.file.path}}</p>
+                <p>{{upload.name}}</p>
+                <p>{{upload.tags}}</p>
+                <a ng-href='{{upload.file.path + "/" + upload.file.originalname}}'>{{upload.file.originalname}}</a></br>
+                <img ng-src='{{upload.file.path + "/" + upload.file.originalname}}' />
+                <a </li>
+        </ul>
+      </div>
+
+      <!-- <img ng-src="" id="imageBox"/>
+      <script>
+      document.getElementById('imageBox').src = "uploads/" + tempID + "/" + tempFileName;
+      </script> -->
+      <!-- <img src="uploads/48e6f497bc1ec79474a7cb965d6ec83c/Bildschirmfoto-2015-05-06-um-15.17.28.png" /> -->
+
+            <!-- <form id="example-form" action="#">
+  <div>
+    <h3>Profile</h3>
+    <section>
+        <label for="name">First name *</label>
+        <input id="name" name="name" type="text" class="required">
+        <label for="surname">Last name *</label>
+        <input id="surname" name="surname" type="text" class="required">
+        <label for="email">Email *</label>
+        <input id="email" name="email" type="text" class="required email">
+        <label for="address">Address</label>
+        <input id="address" name="address" type="text">
+        <p>(*) Mandatory</p>
+    </section>
+
+
+    <h3>Upload</h3>
+    <section>
+      <label for="name">Name:</label>
+      <input type="text" name="name" id="name" ng-model="upload.name" required/>
+      <label for="tags">Tags:</label>
+      <input type="text" name="tags" id="tags" ng-model="upload.tags" required/>
+      <label for="file">File:</label>
+      <input type="file" name="file" id="file" ng-model="upload.file" ngf-select ngf-max-size="25MB" required/>
+
+    </section>
+  </div>
+<form> -->
+</body>
+
+</html>

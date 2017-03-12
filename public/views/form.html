@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Test Tagging Example </title>
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/jquery.steps.css">
+
+    <script src="/vendor/angular.min.js"></script>
+    <script src="/vendor/ng-file-upload-all.min.js"></script>
+    <script src="/javascripts/fileTagging.js"></script>
+    <script type="text/javascript" src="/vendor/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="/vendor/jquery.steps.js"></script>
+    <script type="text/javascript" src="/vendor/jquery-validate.js"></script>
+</head>
+
+<body ng-app="fileUpload">
+
+    <div ng-controller="formCtrl">
+      <div>
+          <img ng-src="" id="imageBox" />
+          <script>
+
+          var tempID = sessionStorage.getItem("tempID");
+          var tempFileName = sessionStorage.getItem("tempFileName");
+          console.log(tempID);
+          console.log(tempFileName);
+
+
+              document.getElementById('imageBox').src = "uploads/" + tempID + "/" + tempFileName;
+          </script>
+      </div>
+        <!-- <div id="wizard"> -->
+          <h2>Session tagging</h2>
+          <!-- <section> -->
+            <h1>Test Session</h1>
+            <form ng-submit="submit()">
+                <label for="q1">Question1:</label>
+                <input type="text" name="q1" id="q1" ng-model="upload.tags.Question1" required/>
+                <br/>
+                <input type="submit" value="Submit" />
+            </form>
+
+            <a href="viewAll">View All</a>
+            <a href="viewSingleUploaded">View Uploaded</a>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>File Upload Example</title>
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/jquery.steps.css">
+
+    <script src="/vendor/angular.min.js"></script>
+    <script src="/vendor/ng-file-upload-all.min.js"></script>
+    <script src="/javascripts/fileuploadExample.js"></script>
+    <script type="text/javascript" src="/vendor/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="/vendor/jquery.steps.js"></script>
+    <script type="text/javascript" src="/vendor/jquery-validate.js"></script>
+    <script type="text/javascript" src="/javascripts/script.js"></script>
+
+
+
+</head>
+
+<body ng-app="fileUpload">
+    <div ng-controller="formCtrl" id="example-form" action="#">
+        <!-- <h1>Ein Test Upload</h1>
+        <form ng-submit="submit()">
+            <legend>Upload a new file here:</legend>
+            <label for="name">Name:</label>
+            <input type="text" name="name" id="name" ng-model="upload.name" required/>
+            <br/>
+            <label for="tags">Tags:</label>
+            <input type="text" name="tags" id="tags" ng-model="upload.tags" required/>
+            <br/>
+            <label for="file">File:</label>
+            <input type="file" name="file" id="file" ng-model="upload.file" ngf-select ngf-max-size="25MB" required/>
+            <br/>
+            <input type="submit" value="Submit" /> -->
+
+
+            <div>
+              <h3>Async Step</h3>
+              <section data-mode="async" data-url="viewUploadedImage">
+              </section>
+
+
+              <h3>Upload</h3>
+              <section>
+                <label for="name">Name:</label>
+                <input type="text" name="name" id="name" ng-model="upload.name" required/>
+                <label for="tags">Tags:</label>
+                <input type="text" name="tags" id="tags" ng-model="upload.tags.Creator" required/>
+                <label for="file">File:</label>
+                <input type="file" name="file" id="file" ng-model="upload.file" ngf-select ngf-max-size="25MB" required/>
+                <input type="submit" value="Submit" />
+
+
+
+              </section>
+
+
+              <h3>Profile</h3>
+              <section>
+                  <label for="name">First name *</label>
+                  <input id="name" name="name" type="text" class="required">
+                  <label for="surname">Last name *</label>
+                  <input id="surname" name="surname" type="text" class="required">
+                  <label for="email">Email *</label>
+                  <input id="email" name="email" type="text" class="required email">
+                  <label for="address">Address</label>
+                  <input id="address" name="address" type="text">
+                  <p>(*) Mandatory</p>
+              </section>
+
+
+              <h3>Tagging</h3>
+              <section>
+                  <label for="name">Tag *</label>
+                  <input id="name" name="name" type="text" class="required">
+                  <label for="surname">Tag *</label>
+                  <input id="surname" name="surname" type="text" class="required">
+                  <label for="email">Tag *</label>
+                  <input id="email" name="email" type="text" class="required email">
+                  <label for="address">Address</label>
+                  <input id="address" name="address" type="text">
+                  <p>(*) Mandatory</p>
+              </section>
+
+              <h3>Madatory Stuff</h3>
+              <section>
+                  <label for="name">Lel *</label>
+                  <input id="name" name="name" type="text" class="required">
+                  <label for="surname">AHqha *</label>
+                  <input id="surname" name="surname" type="text" class="required">
+                  <label for="email">Played Urself *</label>
+                  <input id="email" name="email" type="text" class="required email">
+                  <label for="address">New</label>
+                  <input id="address" name="address" type="text">
+                  <p>(*) Mandatory</p>
+              </section>
+            </div>
+        </form>
+</body>
+
+</html>
