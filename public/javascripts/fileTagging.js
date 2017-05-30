@@ -1,31 +1,15 @@
-var app = angular.module('fileUpload', ['ngFileUpload']);
-var tempFileName, tempID;
+$(function() {
+  $('input, select').on('change', function(event) {
+    var $element = $(event.target),
+      $container = $element.closest('.example');
 
-app.controller('formCtrl', ['$http', 'Upload', '$scope', function($http, Upload, $scope) {
+    if (!$element.data('tagsinput'))
+      return;
 
-    $http.get('/uploads').then(function(response) {
-        console.log(response.data);
-        $scope.uploads = response.data;
-    });
-
-    $scope.submit = function() {
-        Upload.upload({
-            url: '/uploads',
-            method: 'put',
-            data: $scope.upload
-        }).then(function(response) {
-            tempID = response.data.file.filename;
-            sessionStorage.setItem("tempID", tempID);
-
-            tempFileName = response.data.file.originalname;
-            sessionStorage.setItem("tempFileName", tempFileName);
-
-            console.log(tempID);
-            console.log(tempFileName);
-
-            console.log(response.data);
-            $scope.uploads.push(response.data);
-            $scope.upload = {};
-        })
-    }
-}]);
+    var val = $element.val();
+    if (val === null)
+      val = "null";
+    $('code', $('pre.val', $container)).html( ($.isArray(val) ? JSON.stringify(val) : "\"" + val.replace('"', '\\"') + "\"") );
+    $('code', $('pre.items', $container)).html(JSON.stringify($element.tagsinput('items')));
+  }).trigger('change');
+});

@@ -1,0 +1,16 @@
+    <div ng-controller="formCtrlAuthor" id="example-form" action="#">
+        <h2>All uploads are here:</h2>
+        <ul>
+            <li ng-repeat="upload in author">
+                <h2>Upload By</h2>
+                <p>{{upload.tags.CreatorArtist}}</p>
+                <h2>CreatorArtist</h2>
+                <p>{{upload.tags.CreatorArtist}}</p>
+                <h2>TAGS</h2>
+                <p>{{upload.tags}}</p>
+             
+                <a ng-href='{{upload.file.path + "/" + upload.file.originalname}}'>{{upload.file.originalname}}</a></br>
+                <img ng-src='{{upload.file.path + "/" + upload.file.originalname}}'/>
+                <a </li>
+        </ul>
+      </div>

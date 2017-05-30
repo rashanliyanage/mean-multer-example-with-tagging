@@ -7,117 +7,50 @@
     <link rel="stylesheet" href="/css/normalize.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/jquery.steps.css">
+    <!--<link rel="stylesheet" type="text/css" href="css/app.css" />-->
+    <!--<link rel="stylesheet" type="text/css" href="css/bootstrap-infoinput.css" />-->
 
     <script src="/vendor/angular.min.js"></script>
     <script src="/vendor/ng-file-upload-all.min.js"></script>
-    <script src="/javascripts/fileuploadExample.js"></script>
+    <script src="/vendor/angular-resource.js"></script>
+    <script src="/vendor/angular-route.min.js"></script>
+    <script src="/javascripts/fileUpload.js"></script>
+    
+    <script src="/javascripts/author-detail.module.js"></script>
+    <script src="/javascripts/author-detail.component.js"></script>
+
+
+
+
     <script type="text/javascript" src="/vendor/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="/vendor/jquery.steps.js"></script>
     <script type="text/javascript" src="/vendor/jquery-validate.js"></script>
     <script type="text/javascript" src="/javascripts/script.js"></script>
+    <!--<script type="text/javascript" src="/vendor/bootstrap-infoinput-angular.min.js"></script>
+    <script type="text/javascript" src="/vendor/bootstrap-infoinput.js"></script>-->
+    <!--<script src="/javascripts/fileTagging.js"></script>-->
 
 
-    <script>
-        $(function() {
+
+
+    <!--<script>
+        $(function () {
             $("#wizard").steps({
                 headerTag: "h2",
                 bodyTag: "section",
                 transitionEffect: "slideLeft"
             });
         });
-    </script>
-
-
+    </script>-->
 
 </head>
 
 
-
-
-
-
 <body ng-app="fileUpload">
 
-    <div ng-controller="formCtrl">
-        <!-- <div id="wizard"> -->
-          <h2>Upload</h2>
-          <!-- <section> -->
-            <h1>Ein Test Upload</h1>
-            <form ng-submit="submit()">
-                <legend>Upload a new file here:</legend>
-                <label for="name">Name:</label>
-                <input type="text" name="name" id="name" ng-model="upload.name" required/>
-                <br/>
-                <label for="tags">Tags:</label>
-                <input type="text" name="tags" id="tags" ng-model="upload.tags.tags" required/>
-                <br/>
-                <!-- <label for="tags2">Tags2:</label>
-            <input type="text" name="tags2" id="tags2" ng-model="upload.tags" required/>
-            <br/> -->
-                <label for="file">File:</label>
-                <input type="file" class="imgInp" name="file" id="file" ng-model="upload.file" ngf-select ngf-max-size="25MB" required/>
-                <br/>
-                <input type="submit" value="Submit" />
-            </form>
+    <div ng-view></div>
 
 
-            <a href="viewAll">View All</a>
-            <a href="viewSingleUploaded">View Uploaded</a> </br>
-            <a href="form">NEXT FORM</a>
-
-
-
-
-            <!-- <h2>All uploads are here:</h2>
-        <ul>
-            <li ng-repeat="upload in uploads">
-                <p>{{upload.name}}</p>
-                <p>{{upload.tags}}</p>
-                <a ng-href='{{upload.file.path + "/" + upload.file.originalname}}'>{{upload.file.originalname}}</a></br>
-                <img ng-src='{{upload.file.path + "/" + upload.file.originalname}}' />
-                <a </li>
-        </ul> -->
-      <!-- </section> -->
-
-      <!-- <h2>Second Step</h2> -->
-      <!-- <section>
-          <p>Donec mi sapien, hendrerit nec egestas a, rutrum vitae dolor. Nullam venenatis diam ac ligula elementum pellentesque.
-              In lobortis sollicitudin felis non eleifend. Morbi tristique tellus est, sed tempor elit. Morbi varius, nulla quis condimentum
-              dictum, nisi elit condimentum magna, nec venenatis urna quam in nisi. Integer hendrerit sapien a diam adipiscing consectetur.
-              In euismod augue ullamcorper leo dignissim quis elementum arcu porta. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Vestibulum leo velit, blandit ac tempor nec, ultrices id diam. Donec metus lacus, rhoncus sagittis iaculis nec, malesuada a diam.
-              Donec non pulvinar urna. Aliquam id velit lacus.</p>
-      </section> -->
-        <!-- </div> -->
-    </div>
-    <!-- <form id="example-form" action="#">
-  <div>
-    <h3>Profile</h3>
-    <section>
-        <label for="name">First name *</label>
-        <input id="name" name="name" type="text" class="required">
-        <label for="surname">Last name *</label>
-        <input id="surname" name="surname" type="text" class="required">
-        <label for="email">Email *</label>
-        <input id="email" name="email" type="text" class="required email">
-        <label for="address">Address</label>
-        <input id="address" name="address" type="text">
-        <p>(*) Mandatory</p>
-    </section>
-
-
-    <h3>Upload</h3>
-    <section>
-      <label for="name">Name:</label>
-      <input type="text" name="name" id="name" ng-model="upload.name" required/>
-      <label for="tags">Tags:</label>
-      <input type="text" name="tags" id="tags" ng-model="upload.tags" required/>
-      <label for="file">File:</label>
-      <input type="file" name="file" id="file" ng-model="upload.file" ngf-select ngf-max-size="25MB" required/>
-
-    </section>
-  </div>
-<form> -->
 </body>
 
 </html>
