@@ -163,16 +163,16 @@ router.get('/:uuid/:filename', function (req, res, next) {
 });
 
 
-// router.get('/:uuid/:filename', function (req, res, next) {
-//     Upload.findOne({
-//         'file.filename': req.params.uuid,
-//         'file.originalname': req.params.filename
-//     }, function (err, upload) {
-//         if (err) next(err);
-//         else {
-//             res.send(upload);
-//         }
-//     });
-// });
+router.get('/image/:uuid/:filename', function (req, res, next) {
+    Upload.find({
+        'file.filename': req.params.uuid,
+        'file.originalname': req.params.filename
+    }, function (err, upload) {
+        if (err) next(err);
+        else {
+            res.send(upload);
+        }
+    });
+});
 
 module.exports = router;

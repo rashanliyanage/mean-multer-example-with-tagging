@@ -23,7 +23,7 @@ app.config(function ($routeProvider, $locationProvider) {
         when('/uploads/:author', {
           templateUrl: '../views/viewAuthor.html'
         }).
-        when('/uploads/::uuid/:filename', {
+        when('/uploads/image/:uuid/:filename', {
           templateUrl: '../views/viewImage.html'
         }).
         otherwise('/uploads');
@@ -105,17 +105,19 @@ app.controller('formCtrlAuthor', ['$http', 'Upload', '$scope', '$routeParams', f
     console.log($routeParams.author);
 
     $http.get('/uploads/' + $routeParams.author).then(function(response) {
-        $scope.author = response.data;
+    console.log(response.data);    
+    $scope.author = response.data;
     });
 }]);
 
 app.controller('formCtrlImage', ['$http', 'Upload', '$scope', '$routeParams', function($http, Upload, $scope, $routeParams) {
 
-    console.log($routeParams);
+console.log($routeParams);
 
-    // $http.get('/uploads/' + $routeParams.author).then(function(response) {
-    //     $scope.image = response.data;
-    // });
+    $http.get('/uploads/image/' + $routeParams.uuid + '/'+ $routeParams.filename).then(function(response) {
+    console.log(response.data);
+    $scope.image = response.data;
+    });
 }]);
 
 

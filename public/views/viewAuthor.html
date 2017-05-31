@@ -2,14 +2,17 @@
         <h2>All uploads are here:</h2>
         <ul>
             <li ng-repeat="upload in author">
-                <h2>Upload By</h2>
-                <p>{{upload.tags.CreatorArtist}}</p>
+                <!--<h2>Upload By</h2>
+                <p>{{upload.name}}</p>
                 <h2>CreatorArtist</h2>
                 <p>{{upload.tags.CreatorArtist}}</p>
                 <h2>TAGS</h2>
                 <p>{{upload.tags}}</p>
+                 <h2>All</h2>
+                <p>{{upload}}</p>-->
              
                 <a ng-href='{{upload.file.path + "/" + upload.file.originalname}}'>{{upload.file.originalname}}</a></br>
+                <a href="#/uploads/image/{{upload.file.filename}}/{{upload.file.originalname}}">Info to images</a></br>
                 <img ng-src='{{upload.file.path + "/" + upload.file.originalname}}'/>
                 <a </li>
         </ul>
