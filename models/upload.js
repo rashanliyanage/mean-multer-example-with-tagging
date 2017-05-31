@@ -13,14 +13,6 @@ var mongoose = require('mongoose');
 //     file: Object
 // });
 
-
-// UploadSchema.statics = {
-//   load: function(id, cb){
-//       this.findOne({_id: id}).exec(cb);
-//   }
-// }
-
-
 var TagSchema = mongoose.Schema({
     ImageObjects: String,
     CreatorArtist: String,

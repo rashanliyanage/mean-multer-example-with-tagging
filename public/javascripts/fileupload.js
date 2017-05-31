@@ -20,6 +20,9 @@ app.config(function ($routeProvider, $locationProvider) {
          when('/uploadForm', {
           templateUrl: '../views/uploadForm.html'
         }).
+        when('/updateForm', {
+          templateUrl: '../views/updateForm.html'
+        }).
         when('/uploads/:author', {
           templateUrl: '../views/viewAuthor.html'
         }).
@@ -60,12 +63,12 @@ app.controller('formCtrl', ['$http', 'Upload', '$scope', function($http, Upload,
     }
 }]);
 
-app.controller('formCtrlUpdate', ['$http', 'Upload', '$scope', function($http, Upload, $scope) {
+app.controller('formCtrlUpdate', ['$http', 'Upload', '$scope',  '$routeParams',function($http, Upload, $scope, $routeParams) {
 
-    $http.get('/uploads').then(function(response) {
-        console.log(response.data);
-        $scope.all = response.data;
-    });
+    // $http.get('/uploads').then(function(response) {
+    //     console.log(response.data);
+    //     $scope.all = response.data;
+    // });
 
     $scope.submit = function() {
         Upload.upload({
