@@ -9,10 +9,22 @@ app.config(function ($routeProvider, $locationProvider) {
 
       $routeProvider.
         when('/', {
+          templateUrl: '../views/home.html'
+        }).
+        when('/viewAll', {
+          templateUrl: '../views/viewAll.html'
+        }).
+         when('/viewSessions', {
           templateUrl: '../views/viewAllPartner.html'
+        }).
+         when('/uploadForm', {
+          templateUrl: '../views/uploadForm.html'
         }).
         when('/uploads/:author', {
           templateUrl: '../views/viewAuthor.html'
+        }).
+        when('/uploads/::uuid/:filename', {
+          templateUrl: '../views/viewImage.html'
         }).
         otherwise('/uploads');
 
@@ -89,8 +101,7 @@ app.controller('formCtrlSessions', ['$http', 'Upload', '$scope', function($http,
 }]);
 
 app.controller('formCtrlAuthor', ['$http', 'Upload', '$scope', '$routeParams', function($http, Upload, $scope, $routeParams) {
-    // var author = 'UFO';
-
+    
     console.log($routeParams.author);
 
     $http.get('/uploads/' + $routeParams.author).then(function(response) {
@@ -98,14 +109,16 @@ app.controller('formCtrlAuthor', ['$http', 'Upload', '$scope', '$routeParams', f
     });
 }]);
 
+app.controller('formCtrlImage', ['$http', 'Upload', '$scope', '$routeParams', function($http, Upload, $scope, $routeParams) {
 
-// app.controller('formCtrlAuthor', ['$http', 'Upload', '$scope', function($http, Upload, $scope) {
+    console.log($routeParams);
 
-//     $http.get('/uploads/ufo').then(function(response) {
-//         console.log(response.data);
-//         $scope.author = response.data;
-//     });
-// }]);
+    // $http.get('/uploads/' + $routeParams.author).then(function(response) {
+    //     $scope.image = response.data;
+    // });
+}]);
+
+
 
 // app.controller('formCtrlSessions', ['$http', 'Upload', '$scope', function($http, Upload, $scope) {
 

@@ -79,19 +79,7 @@ router.get('/:author', function (req, res, next) {
     }, function (err, upload) {
         if (err) next(err);
         else {
-            // res.set({c
-            //     "Content-Disposition": 'inline;',
-            //     "Content-Type": upload.file.mimetype
-            // });
-
             res.send(upload);
-
-            // res.set({
-            // "Content-Type": upload.file.mimetype
-            // });
-            // fs.createReadStream(upload.file.path).pipe(res);
-           
-
         }
     });
 });
@@ -166,12 +154,25 @@ router.get('/:uuid/:filename', function (req, res, next) {
 
             // res.send(upload);
             res.set({
-                "Content-Disposition": 'inline; filename="' + upload.file.originalname + '"',
+                "Content-Disposition": 'attachment; filename="' + upload.file.originalname + '"',
                 "Content-Type": upload.file.mimetype
             });
             fs.createReadStream(upload.file.path).pipe(res);
         }
     });
 });
+
+
+// router.get('/:uuid/:filename', function (req, res, next) {
+//     Upload.findOne({
+//         'file.filename': req.params.uuid,
+//         'file.originalname': req.params.filename
+//     }, function (err, upload) {
+//         if (err) next(err);
+//         else {
+//             res.send(upload);
+//         }
+//     });
+// });
 
 module.exports = router;
