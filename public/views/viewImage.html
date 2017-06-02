@@ -1,25 +1,24 @@
-    <div ng-controller="formCtrlImage" id="example-form" action="#">
-        <h2>Image is here:</h2>
-        <ul>
-            <li ng-repeat="upload in image">
-           <h2>Upload By</h2>
-                <p>{{upload.name}}</p>
-                <h2>CreatorArtist</h2>
-                <p>{{upload.tags.CreatorArtist}}</p>
-                <h2>TAGS</h2>
-                <p>{{upload.tags}}</p>
-                 <h2>All</h2>
-                <p>{{upload}}</p>
-             
-                <a ng-href='{{upload.file.path + "/" + upload.file.originalname}}'>{{upload.file.originalname}}</a></br>
-                <img ng-src='{{upload.file.path + "/" + upload.file.originalname}}'/>
-           
-                <a </li>
+<div ng-controller="formCtrlImage" id="example-form" action="#">
+    <h2>Image is here:</h2>
+    <ul>
+        <li ng-repeat="upload in image">
+            <h2>Upload By</h2>
+            <p>{{upload.name}}</p>
+            <h2>CreatorArtist</h2>
+            <p>{{upload.tags.CreatorArtist}}</p>
+            <h2>TAGS</h2>
+            <p>{{upload.tags}}</p>
+            <h2>All</h2>
+            <p>{{upload}}</p>
+
+            <a ng-href='{{upload.file.path + "/" + upload.file.originalname}}'>{{upload.file.originalname}}</a></br>
+            <img ng-src='{{upload.file.path + "/" + upload.file.originalname}}' />
+
+            <a </li>
                         <a href="#/uploadForm">Update this image</a></br>
 
-        
-        </ul>
+
+    </ul>
 
 
-      </div>
-      
+</div>

@@ -48,14 +48,13 @@ router.get('/', function (req, res, next) {
 
 router.get('/sessions', function (req, res, next) {
     Upload.find().distinct('name', function (err, upload) {
-        if (err){
+        if (err) {
             next(err);
-        } 
-        else {
+        } else {
             res.send(upload);
         }
-     //}).select('name -_id');
-    
+        //}).select('name -_id');
+
 
         // Upload.find({}, function (err, uploads) {
         // if (err) next(err);
@@ -63,7 +62,7 @@ router.get('/sessions', function (req, res, next) {
         //     console.log(uploads);
         //     res.send(uploads);
         // }
-     });
+    });
 });
 
 
