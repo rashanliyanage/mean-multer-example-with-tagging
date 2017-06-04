@@ -12,10 +12,11 @@
             <p>{{upload}}</p>
 
             <a ng-href='{{upload.file.path + "/" + upload.file.originalname}}'>{{upload.file.originalname}}</a></br>
+            <a href="#/uploads/update/{{upload.file.filename}}/{{upload.file.originalname}}">Update</a></br>
             <img ng-src='{{upload.file.path + "/" + upload.file.originalname}}' />
-
+            
             <a </li>
-                        <a href="#/uploadForm">Update this image</a></br>
+            
 
 
     </ul>

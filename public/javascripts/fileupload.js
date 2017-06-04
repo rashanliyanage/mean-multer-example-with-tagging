@@ -24,13 +24,16 @@ app.config(function ($routeProvider, $locationProvider) {
     when('/updateForm', {
         templateUrl: '../views/updateForm.html'
     }).
+    when('/uploads/update/:uuid/:filename', {
+        templateUrl: '../views/updateForm.html'
+    }).
     when('/uploads/:author', {
         templateUrl: '../views/viewAuthor.html'
     }).
     when('/uploads/image/:uuid/:filename', {
         templateUrl: '../views/viewImage.html'
     }).
-    otherwise('/uploads');
+    otherwise('/');
 
 });
 
@@ -62,18 +65,19 @@ app.controller('formCtrl', ['$http', 'Upload', '$scope', function ($http, Upload
         })
     }
 }]);
-
 app.controller('formCtrlUpdate', ['$http', 'Upload', '$scope', '$routeParams', function ($http, Upload, $scope, $routeParams) {
 
-    // $http.get('/uploads').then(function(response) {
-    //     console.log(response.data);
-    //     $scope.all = response.data;
-    // });
+    // console.log($routeParams);
 
-    $scope.submit = function () {
+    $http.get('/uploads/update/' + $routeParams.uuid + '/' + $routeParams.filename).then(function (response) {
+        console.log(response.data);
+        $scope.image = response.data;
+    });
+
+      $scope.submit = function () {
         Upload.upload({
-            url: '/uploads',
-            method: 'put',
+            url: '/uploads/' + $routeParams.uuid + '/' + $routeParams.filename,
+            method: 'PUT',
             data: $scope.upload
         }).then(function (response) {
             tempID = response.data.file.filename;
@@ -82,8 +86,8 @@ app.controller('formCtrlUpdate', ['$http', 'Upload', '$scope', '$routeParams', f
             tempFileName = response.data.file.originalname;
             sessionStorage.setItem("tempFileName", tempFileName);
 
-            // console.log(tempID);
-            // console.log(tempFileName);
+            console.log(tempID);
+            console.log(tempFileName);
 
             console.log(response.data);
             $scope.all.push(response.data);
@@ -93,6 +97,7 @@ app.controller('formCtrlUpdate', ['$http', 'Upload', '$scope', '$routeParams', f
 }]);
 
 
+
 app.controller('formCtrlSessions', ['$http', 'Upload', '$scope', function ($http, Upload, $scope) {
 
     $http.get('/uploads/sessions').then(function (response) {
@@ -100,12 +105,13 @@ app.controller('formCtrlSessions', ['$http', 'Upload', '$scope', function ($http
         $scope.sessions = response.data;
     });
 
+  
 
 }]);
 
 app.controller('formCtrlAuthor', ['$http', 'Upload', '$scope', '$routeParams', function ($http, Upload, $scope, $routeParams) {
 
-    console.log($routeParams.author);
+    // console.log($routeParams.author);
 
     $http.get('/uploads/' + $routeParams.author).then(function (response) {
         console.log(response.data);
@@ -115,7 +121,7 @@ app.controller('formCtrlAuthor', ['$http', 'Upload', '$scope', '$routeParams', f
 
 app.controller('formCtrlImage', ['$http', 'Upload', '$scope', '$routeParams', function ($http, Upload, $scope, $routeParams) {
 
-    console.log($routeParams);
+    // console.log($routeParams);
 
     $http.get('/uploads/image/' + $routeParams.uuid + '/' + $routeParams.filename).then(function (response) {
         console.log(response.data);
