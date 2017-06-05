@@ -33,6 +33,24 @@ router.post('/', upload.single('file'), function (req, res, next) {
 
 
 
+router.put('/update/:uuid/:filename', function (req, res) {
+    Upload.findOneAndUpdate({
+            'file.filename': req.params.uuid,
+            'file.originalname': req.params.filename
+        }, {
+            $push: {
+                tags: req.body.tags
+            }
+        },
+        function (err, upload) {
+            if (err) next(err);
+            else {
+                res.send(upload);
+            }
+        });
+});
+
+
 // /**
 //  * Gets the list of all files from the database
 //  */
@@ -108,35 +126,18 @@ router.get('/:author', function (req, res, next) {
 // });
 
 
-/*router.put('/:uuid/:filename', function(req, res) {
-    Upload.update({
-        'file.filename': req.params.uuid,
-        'file.originalname': req.params.filename
-    }, { $set: { tags: req.body.tags }},
-    function(err, upload) {
-        if (err) next(err);
-        else {
-          res.send(upload);
-        }
-    });
-});*/
-
-router.put('/:uuid/:filename', function (req, res) {
-    Upload.findOneAndUpdate({
-            'file.filename': req.params.uuid,
-            'file.originalname': req.params.filename
-        }, {
-            $push: {
-                tags: req.body.tags
-            }
-        },
-        function (err, upload) {
-            if (err) next(err);
-            else {
-                res.send(upload);
-            }
-        });
-});
+// router.put('/:uuid/:filename', function(req, res) {
+//     Upload.update({
+//         'file.filename': req.params.uuid,
+//         'file.originalname': req.params.filename
+//     }, { $set: { tags: req.body.tags }},
+//     function(err, upload) {
+//         if (err) next(err);
+//         else {
+//           res.send(upload);
+//         }
+//     });
+// });
 
 
 /**
