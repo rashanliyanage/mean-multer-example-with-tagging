@@ -18,6 +18,9 @@ app.config(function ($routeProvider, $locationProvider) {
     when('/viewSessions', {
         templateUrl: '../views/viewAllPartner.html'
     }).
+    when('/topics', {
+        templateUrl: '../views/viewTopics.html'
+    }).
     when('/uploadForm', {
         templateUrl: '../views/uploadForm.html'
     }).
@@ -39,7 +42,7 @@ app.config(function ($routeProvider, $locationProvider) {
 
 app.controller('formCtrl', ['$http', 'Upload', '$scope', function ($http, Upload, $scope) {
 
-    $http.get('/uploads').then(function (response) {
+    $http.get('/').then(function (response) {
         console.log(response.data);
         $scope.all = response.data;
     });
@@ -71,32 +74,23 @@ app.controller('formCtrlUpdate', ['$http', 'Upload', '$scope', '$routeParams', f
     // console.log($routeParams);
 
     $http.get('/uploads/update/' + $routeParams.uuid + '/' + $routeParams.filename).then(function (response) {
-        // $http.get('/').then(function (response) {
         console.log(response.data);
         $scope.image = response.data;
+        console.log("Beginning");
     });
 
     $scope.submit = function () {
-        console.log("Beginning");
+
         Upload.upload({
             // url: '/uploads',
             url: '/uploads/update/' + $routeParams.uuid + '/' + $routeParams.filename,
-            method: 'put',
-            data: $scope.upload
-
+            method: 'post',
+            data: {_method:'put', file: $scope.upload}
+            // data: $scope.upload
         }).then(function (response) {
-            // tempID = response.data.file.filename;
-            // sessionStorage.setItem("tempID", tempID);
-
-            // tempFileName = response.data.file.originalname;
-            // sessionStorage.setItem("tempFileName", tempFileName);
-
-            // console.log(tempID);
-            // console.log(tempFileName);
-
-            // console.log(response.data);
-            // $scope.all.push(response.data);
-            // $scope.upload = {};
+            console.log(response.data);
+            $scope.all.push(response.data);
+            $scope.upload = {};
             console.log("Update")
         })
     }
@@ -122,6 +116,17 @@ app.controller('formCtrlAuthor', ['$http', 'Upload', '$scope', '$routeParams', f
     $http.get('/uploads/' + $routeParams.author).then(function (response) {
         console.log(response.data);
         $scope.author = response.data;
+    });
+}]);
+
+
+app.controller('CtrlTopic', ['$http', 'Upload', '$scope', '$routeParams', function ($http, Upload, $scope, $routeParams) {
+
+    // console.log($routeParams.author);
+
+    $http.get('/uploads/topics').then(function (response) {
+        console.log(response.data);
+        $scope.topics = response.data;
     });
 }]);
 

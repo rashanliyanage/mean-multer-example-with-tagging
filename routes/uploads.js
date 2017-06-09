@@ -83,6 +83,25 @@ router.get('/sessions', function (req, res, next) {
     });
 });
 
+router.get('/topics', function (req, res, next) {
+    Upload.find().distinct('name', function (err, upload) {
+        if (err) {
+            next(err);
+        } else {
+            res.send(upload);
+        }
+        //}).select('name -_id');
+
+
+        // Upload.find({}, function (err, uploads) {
+        // if (err) next(err);
+        // else {
+        //     console.log(uploads);
+        //     res.send(uploads);
+        // }
+    });
+});
+
 
 
 

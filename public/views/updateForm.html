@@ -5,23 +5,25 @@
             <a ng-href='{{upload.file.path + "/" + upload.file.originalname}}'>{{upload.file.originalname}}</a></br>
             <img ng-src='{{upload.file.path + "/" + upload.file.originalname}}' />
 
-            <a </li>
-                <form ng-submit="submit()">
-                    <legend>Upload a new file here:</legend>
-                    <label for="name">Name:</label>
-                    <input type="text" name="name" id="name" ng-model="upload.name" required/>
-                    <br/>
 
-                    <label for="CreatorArtist">Artist:</label>
-                    <input type="text" name="CreatorArtist" id="CreatorArtist" class="demo-default" ng-model="upload.tags.CreatorArtist" required/>
-                    <br/>
+            <form ng-submit="submit()">
+                <legend>Update file here:</legend>
+                <label for="name">Name:</label>
+                <input type="text" name="name" id="name" ng-model="upload.name" />
+                <br/>
 
-                    <label for="info">Image Description:</label>
-                    <input type="text" name="info" id="info" ng-model="upload.tags.info" required/>
-                    <br/>
+                <label for="CreatorArtist">Artist:</label>
+                <input type="text" name="CreatorArtist" id="CreatorArtist" class="demo-default" ng-model="upload.tags.CreatorArtist" />
+                <br/>
 
-                    <input type="submit" value="Update" />
+                <label for="info">Image Description:</label>
+                <input type="text" name="info" id="info" ng-model="upload.tags.info" />
+                <br/>
 
-                </form>
+                <input type="submit" value="Update" />
+
+            </form>
+        </li>
+
     </ul>
 </div>

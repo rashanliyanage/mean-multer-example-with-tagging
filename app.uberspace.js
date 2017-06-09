@@ -7,10 +7,10 @@ var uploads = require('./routes/uploads');
 
 var app = express();
 // var mongoURI = "mongodb://localhost:27017/images"; // replace with your mongodb url
-var mongoURI = "mongodb://nan_mongoadmin:iel7eiwahB@spica:21349/db?authSource=images"; // replace with your mongodb url
+var mongoURI = "mongodb://nan_mongoadmin:iel7eiwahB@localhost:21349/db?authSource=images"; // replace with your mongodb url
 
 
-var MongoDB = mongoose.connect(mongoURI).connection;
+var MongoDB = mongoose.connect(mongoURI, {auth:{authdb:"admin"}}).connection;
 MongoDB.on('error', function (err) {
   if (err) {
     console.log('mongodb connection error', err);

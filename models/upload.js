@@ -1,18 +1,5 @@
 var mongoose = require('mongoose');
 
-// var UploadSchema = mongoose.Schema({
-//     name: String,
-//     tags: {
-//         ImageObjects: String,
-//         CreatorArtist: String,
-//         Question1: String,
-//         Question2: String,
-//         tags: String
-//     },
-//     created: Date,
-//     file: Object
-// });
-
 var TagSchema = mongoose.Schema({
     ImageObjects: String,
     CreatorArtist: String,
