@@ -42,31 +42,32 @@ app.config(function ($routeProvider, $locationProvider) {
 
 app.controller('formCtrl', ['$http', 'Upload', '$scope', function ($http, Upload, $scope) {
 
-    $http.get('/').then(function (response) {
-        console.log(response.data);
-        $scope.all = response.data;
-    });
+    // $http.get('/uploads').then(function (response) {
+    //     console.log(response.data);
+    //     $scope.all = response.data;
+    // });
 
     $scope.submit = function () {
-        Upload.upload({
-            url: '/uploads',
-            method: 'post',
-            data: $scope.upload
-        }).then(function (response) {
-            // tempID = response.data.file.filename;
-            // sessionStorage.setItem("tempID", tempID);
+        console.log($scope.upload)
+        // Upload.upload({
+        //     url: '/uploads',
+        //     method: 'post',
+        //     data: $scope.upload
+        // }).then(function (response) {
+        //     // tempID = response.data.file.filename;
+        //     // sessionStorage.setItem("tempID", tempID);
 
-            // tempFileName = response.data.file.originalname;
-            // sessionStorage.setItem("tempFileName", tempFileName);
+        //     // tempFileName = response.data.file.originalname;
+        //     // sessionStorage.setItem("tempFileName", tempFileName);
 
-            // console.log(tempID);
-            // console.log(tempFileName);
+        //     // console.log(tempID);
+        //     // console.log(tempFileName);
 
-            console.log(response.data);
-            $scope.all.push(response.data);
-            $scope.upload = {};
-            console.log("Uploaded")
-        })
+        //     console.log(response.data);
+        //     $scope.all.push(response.data);
+        //     $scope.upload = {};
+        //     console.log("Uploaded")
+        // })
     }
 }]);
 app.controller('formCtrlUpdate', ['$http', 'Upload', '$scope', '$routeParams', function ($http, Upload, $scope, $routeParams) {
@@ -80,17 +81,21 @@ app.controller('formCtrlUpdate', ['$http', 'Upload', '$scope', '$routeParams', f
     });
 
     $scope.submit = function () {
+        console.log($scope.image)
+        // console.log("Update")
 
         Upload.upload({
-            // url: '/uploads',
             url: '/uploads/update/' + $routeParams.uuid + '/' + $routeParams.filename,
             method: 'post',
-            data: {_method:'put', file: $scope.upload}
-            // data: $scope.upload
+            data: {
+                _method: 'put',
+                file: $scope.image
+            }
+            // data: $scope.image
         }).then(function (response) {
             console.log(response.data);
             $scope.all.push(response.data);
-            $scope.upload = {};
+            // $scope.image = {};
             console.log("Update")
         })
     }
