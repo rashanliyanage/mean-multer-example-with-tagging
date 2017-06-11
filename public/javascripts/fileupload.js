@@ -40,34 +40,38 @@ app.config(function ($routeProvider, $locationProvider) {
 
 });
 
+app.config(['$qProvider', function ($qProvider) {
+    $qProvider.errorOnUnhandledRejections(false);
+}]);
+
 app.controller('formCtrl', ['$http', 'Upload', '$scope', function ($http, Upload, $scope) {
 
-    // $http.get('/uploads').then(function (response) {
-    //     console.log(response.data);
-    //     $scope.all = response.data;
-    // });
+    $http.get('/uploads').then(function (response) {
+        console.log(response.data);
+        $scope.all = response.data;
+    });
 
     $scope.submit = function () {
-        console.log($scope.upload)
-        // Upload.upload({
-        //     url: '/uploads',
-        //     method: 'post',
-        //     data: $scope.upload
-        // }).then(function (response) {
-        //     // tempID = response.data.file.filename;
-        //     // sessionStorage.setItem("tempID", tempID);
+        // console.log($scope.upload)
+        Upload.upload({
+            url: '/uploads',
+            method: 'post',
+            data: $scope.upload
+        }).then(function (response) {
+            // tempID = response.data.file.filename;
+            // sessionStorage.setItem("tempID", tempID);
 
-        //     // tempFileName = response.data.file.originalname;
-        //     // sessionStorage.setItem("tempFileName", tempFileName);
+            // tempFileName = response.data.file.originalname;
+            // sessionStorage.setItem("tempFileName", tempFileName);
 
-        //     // console.log(tempID);
-        //     // console.log(tempFileName);
+            // console.log(tempID);
+            // console.log(tempFileName);
 
-        //     console.log(response.data);
-        //     $scope.all.push(response.data);
-        //     $scope.upload = {};
-        //     console.log("Uploaded")
-        // })
+            console.log(response.data);
+            $scope.all.push(response.data);
+            $scope.upload = {};
+            console.log("Uploaded")
+        })
     }
 }]);
 app.controller('formCtrlUpdate', ['$http', 'Upload', '$scope', '$routeParams', function ($http, Upload, $scope, $routeParams) {
@@ -76,25 +80,43 @@ app.controller('formCtrlUpdate', ['$http', 'Upload', '$scope', '$routeParams', f
 
     $http.get('/uploads/update/' + $routeParams.uuid + '/' + $routeParams.filename).then(function (response) {
         console.log(response.data);
+        console.log("________Response.data[0]_______________");
+        console.log(response.data[0].tags);
+
+
+        var obj = response.data[0].tags.info
+        var myJSON = JSON.stringify(obj)
+        console.log(myJSON);
+
         $scope.image = response.data;
+        $scope.upload = {
+            name: response.data[0].name,
+            tags: {
+                info: response.data[0].tags.info,
+                // info: "HDF",
+                CreatorArtist: response.data[0].tags.CreatorArtist
+            }
+        };
         console.log("Beginning");
     });
 
+
+
     $scope.submit = function () {
-        console.log($scope.image)
+        // console.log($scope.image)
         // console.log("Update")
 
         Upload.upload({
             url: '/uploads/update/' + $routeParams.uuid + '/' + $routeParams.filename,
-            method: 'post',
-            data: {
-                _method: 'put',
-                file: $scope.image
-            }
-            // data: $scope.image
+            method: 'put',
+            // data: {
+            //     _method: 'PUT',
+            //     data: $scope.image
+            // }
+            data: $scope.upload
         }).then(function (response) {
-            console.log(response.data);
-            $scope.all.push(response.data);
+            // console.log(response.data);
+            $scope.image.push(response.data);
             // $scope.image = {};
             console.log("Update")
         })

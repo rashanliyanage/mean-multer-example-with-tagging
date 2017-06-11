@@ -13,7 +13,10 @@ var _ = require('underscore');
 /**
  * Create's the file in the database
  */
-router.post('/', upload.single('file'), function (req, res, next) {
+// router.post('/', upload.single('file'), function (req, res, next) {
+    router.post('/', upload.single('file'), function (req, res, next) {
+
+    console.log(req.body);
     var newUpload = {
         name: req.body.name,
         tags: req.body.tags,
@@ -33,12 +36,45 @@ router.post('/', upload.single('file'), function (req, res, next) {
 
 
 
-router.put('/update/:uuid/:filename', function (req, res) {
+// router.put('/update/:uuid/:filename', upload.fields([
+//   { name: 'name', maxCount: 1 },  
+//   { name: 'CreatorArtist', maxCount: 1 },
+//   { name: 'info', maxCount: 1 }
+// ]), function (req, res, next) {
+
+// router.put('/update/:uuid/:filename', upload.single('file'), function (req, res, next) {
+// // router.put('/update/:uuid/:filename', function (req, res, next) {
+
+//     // console.log("_______________________req.FILES_______________________________________");
+//     // console.log(req.files);
+//     // console.log("_______________________req_______________________________________");
+//     // console.log(req);
+//     console.log("_______________________req.BODY_______________________________________");
+//                 console.log(req.body);
+
+//     Upload.findOneAndUpdate({
+//             'file.filename': req.params.uuid,
+//             'file.originalname': req.params.filename
+//         }, {
+//             $set: {
+//                 tags: {info: 'Troll'}
+//             }
+//         },
+//         function (err, upload) {
+//             if (err) next(err);
+//             else {
+//                 res.send(upload);
+//             }
+//         });
+// });
+router.put('/update/:uuid/:filename', upload.single(), function (req, res) {
+    console.log(req.body);
     Upload.findOneAndUpdate({
             'file.filename': req.params.uuid,
             'file.originalname': req.params.filename
         }, {
-            $push: {
+            $set: {
+                name: req.body.name,
                 tags: req.body.tags
             }
         },

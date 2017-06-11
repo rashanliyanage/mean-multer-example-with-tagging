@@ -5,7 +5,7 @@ var TagSchema = mongoose.Schema({
     CreatorArtist: String,
     Question1: String,
     Question2: String,
-    info: Array,
+    info: String,
 });
 
 var UploadSchema = mongoose.Schema({
