@@ -1,0 +1,17 @@
+<div ng-controller="CtrlUpdatePersonalRelationSub">
+
+    <h2>Upload</h2>
+    <form ng-submit="submit()">
+        <legend>Upload a new file here:</legend>
+        
+        <label for="Relation">Relation (search for relateted images):</label>
+        <input type="text" name="Relation" id="Relation" ng-model="upload.tags.personalRelation.Relation" />
+        <br/>
+
+
+        <input type="submit" value="Submit" />
+    </form>
+</div>
+
+<a href="#/viewAll">View All</a></br>
+<a href="#/viewSessions">View Sessions by</a></br>

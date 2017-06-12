@@ -14,12 +14,13 @@ var _ = require('underscore');
  * Create's the file in the database
  */
 // router.post('/', upload.single('file'), function (req, res, next) {
-    router.post('/', upload.single('file'), function (req, res, next) {
+router.post('/', upload.single('file'), function (req, res, next) {
 
     console.log(req.body);
     var newUpload = {
-        name: req.body.name,
-        tags: req.body.tags,
+        sessionName: req.body.sessionName,
+        tags: null,
+        sessionIdentifier: req.body.sessionIdentifier,
         created: Date.now(),
         file: req.file
 
@@ -67,15 +68,83 @@ var _ = require('underscore');
 //             }
 //         });
 // });
-router.put('/update/:uuid/:filename', upload.single(), function (req, res) {
+router.put('/updateUploadData/:uuid/:filename', upload.single(), function (req, res, next) {
     console.log(req.body);
     Upload.findOneAndUpdate({
             'file.filename': req.params.uuid,
             'file.originalname': req.params.filename
         }, {
             $set: {
-                name: req.body.name,
-                tags: req.body.tags
+                sessionName: req.body.sessionName,
+                sessionIdentifier: req.body.sessionIdentifier
+            }
+        },
+        function (err, upload) {
+            if (err) next(err);
+            else {
+                res.send(upload);
+            }
+        });
+});
+
+
+
+
+
+router.put('/formImageInfo/:uuid/:filename', upload.single(), function (req, res, next) {
+    // console.log(sessionStorage);
+    Upload.findOneAndUpdate({
+            'file.filename': req.params.uuid,
+            'file.originalname': req.params.filename
+        }, {
+            $set: {
+                tags: {
+                    imageInformation: req.body.tags.imageInformation
+                }
+            }
+        },
+        function (err, upload) {
+            if (err) next(err);
+            else {
+                res.send(upload);
+            }
+        });
+});
+
+
+router.put('/formImageDes/:uuid/:filename', upload.single(), function (req, res, next) {
+    // console.log(sessionStorage);
+    Upload.findOneAndUpdate({
+            'file.filename': req.params.uuid,
+            'file.originalname': req.params.filename
+        }, {
+            $set: {
+                tags: {
+                    imageDescrp: req.body.tags.imageDescrp
+                }
+            }
+        },
+        function (err, upload) {
+            if (err) next(err);
+            else {
+                res.send(upload);
+            }
+        });
+});
+
+
+router.put('/formImageDesLocation/:uuid/:filename', upload.single(), function (req, res, next) {
+    // console.log(sessionStorage);
+    Upload.findOneAndUpdate({
+            'file.filename': req.params.uuid,
+            'file.originalname': req.params.filename
+        }, {
+            $set: {
+                tags: {
+                    imageDescrp: {
+                        revolutionLocation: req.body.tags.imageDescrp.revolutionLocation
+                    }
+                }
             }
         },
         function (err, upload) {
@@ -101,7 +170,8 @@ router.get('/', function (req, res, next) {
 
 
 router.get('/sessions', function (req, res, next) {
-    Upload.find().distinct('name', function (err, upload) {
+    console.log("logged")
+    Upload.find().distinct('sessionName', function (err, upload) {
         if (err) {
             next(err);
         } else {
@@ -147,7 +217,7 @@ router.get('/topics', function (req, res, next) {
 router.get('/:author', function (req, res, next) {
     author = req.params.author;
     Upload.find({
-        'name': req.params.author
+        'sessionName': req.params.author
     }, function (err, upload) {
         if (err) next(err);
         else {
@@ -230,16 +300,49 @@ router.get('/image/:uuid/:filename', function (req, res, next) {
     });
 });
 
-router.get('/update/:uuid/:filename', function (req, res, next) {
-    Upload.find({
-        'file.filename': req.params.uuid,
-        'file.originalname': req.params.filename
-    }, function (err, upload) {
-        if (err) next(err);
-        else {
-            res.send(upload);
-        }
-    });
-});
+// router.get('/update/:uuid/:filename', function (req, res, next) {
+//     // console.log(req);
+//     Upload.find({
+//         'file.filename': req.params.uuid,
+//         'file.originalname': req.params.filename
+//     }, function (err, upload) {
+//         if (err) next(err);
+//         else {
+//             res.send(upload);
+//         }
+//     });
+// });
+
+
+
+// router.get('/formImageInfo/:uuid/:filename', function (req, res, next) {
+//     // console.log(req);
+// // console.log(sessionStorage);
+//     Upload.find({
+//         'file.filename': req.params.uuid,
+//         'file.originalname': req.params.filename
+//     }, function (err, upload) {
+//         if (err) next(err);
+//         else {
+//             res.send(upload);
+//         }
+//     });
+// });
+
+
+// router.get('/formImageDes/:uuid/:filename', function (req, res, next) {
+//     // console.log(req);
+// // console.log(sessionStorage);
+//     Upload.find({
+//         'file.filename': req.params.uuid,
+//         'file.originalname': req.params.filename
+//     }, function (err, upload) {
+//         if (err) next(err);
+//         else {
+//             res.send(upload);
+//         }
+//     });
+// });
+
 
 module.exports = router;

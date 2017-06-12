@@ -1,18 +1,55 @@
 var mongoose = require('mongoose');
 
+// var UploadSchema = mongoose.Schema({
+//     name: String,
+//     tags: {
+//         ImageObjects: String,
+//         CreatorArtist: String,
+//         Question1: String,
+//         Question2: String,
+//         tags: String
+//     },
+//     created: Date,
+//     file: Object
+// });
+
+
+
+var ImageInformationSchema = mongoose.Schema({
+    artist: String,
+    publishingYear: Date,
+    publishingLocation: String,
+    medium: String,
+    form: String
+});
+
+var ImageDescrpSchema = mongoose.Schema({
+    motives: Array,
+    motivesRevolution: Array,
+    revolutionLocation: Array
+});
+
+var PersonalRelationSchema = mongoose.Schema({
+    source: String,
+    placeFoundFirst: String,
+    dateFoundFirst: Date,
+    time: String,
+    Relation: String
+});
+
 var TagSchema = mongoose.Schema({
-    ImageObjects: String,
-    CreatorArtist: String,
-    Question1: String,
-    Question2: String,
-    info: String,
+    imageInformation: ImageInformationSchema,
+    imageDescrp: ImageDescrpSchema,
+    personalRelation: PersonalRelationSchema
 });
 
 var UploadSchema = mongoose.Schema({
-    name: String,
+    sessionName: String,
+    sessionIdentifier: String,
     tags: TagSchema,
     created: Date,
-    file: Object
+    file: Object,
+    sessionRecording: String
 });
 
 
