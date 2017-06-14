@@ -1,6 +1,14 @@
 <div ng-controller="CtrlUpdatePersonalRelation">
 
     <h2>Upload</h2>
+
+        <li ng-repeat="upload in image">
+        <a ng-href='{{upload.file.path + "/" + upload.file.originalname}}'>{{upload.file.originalname}}</a></br>
+            <a href="#/uploads/update/{{upload.file.filename}}/{{upload.file.originalname}}">Update</a></br>
+            <img ng-src='{{upload.file.path + "/" + upload.file.originalname}}' />
+            
+    </li>
+    
     <form ng-submit="submit()">
         <legend>Upload a new file here:</legend>
         
@@ -25,5 +33,5 @@
     </form>
 </div>
 
-<a href="#/viewAll">View All</a></br>
-<a href="#/viewSessions">View Sessions by</a></br>
+<a href="#/formPRelationSub">View All</a></br>
+<!--<a href="#/viewSessions">View Sessions by</a></br>-->

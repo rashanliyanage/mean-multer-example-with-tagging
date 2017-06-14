@@ -156,6 +156,27 @@ router.put('/formImageDesLocation/:uuid/:filename', upload.single(), function (r
 });
 
 
+router.put('/formPRelation/:uuid/:filename', upload.single(), function (req, res, next) {
+    // console.log(sessionStorage);
+    Upload.findOneAndUpdate({
+            'file.filename': req.params.uuid,
+            'file.originalname': req.params.filename
+        }, {
+            $set: {
+                tags: {
+                    personalRelation: req.body.tags.personalRelation
+                }
+            }
+        },
+        function (err, upload) {
+            if (err) next(err);
+            else {
+                res.send(upload);
+            }
+        });
+});
+
+
 // /**
 //  * Gets the list of all files from the database
 //  */

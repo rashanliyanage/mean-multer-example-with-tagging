@@ -33,7 +33,7 @@ app.config(function ($routeProvider, $locationProvider) {
     when('/formImageInfo/', {
         templateUrl: '../views/formImageInfo.html'
     }).
-    when('/formPRelation/:uuid/:filename', {
+    when('/formPRelation', {
         templateUrl: '../views/formPRelation.html'
     }).
     when('/formPRelationSub/:uuid/:filename', {
@@ -230,6 +230,39 @@ app.controller('CtrlUpdateImageDescripLoc', ['$http', 'Upload', '$scope', '$rout
     }
 }]);
 
+
+app.controller('CtrlUpdatePersonalRelation', ['$http', 'Upload', '$scope', '$routeParams', function ($http, Upload, $scope, $routeParams) {
+
+    // console.log($routeParams);
+
+    // $http.get('/formImageInfo/' + $routeParams.uuid + '/' + $routeParams.filename).then(function (response) {
+    $http.get('/uploads/image/' + sessionStorage.ID + '/' + sessionStorage.FileName).then(function (response) {
+
+        console.log(response.data);
+
+
+
+        $scope.image = response.data;
+        // console.log(response.data[0].tags.imageInformation);
+        // $scope.upload = {
+        //     tags: {
+        //         imageInformation: response.data[0].tags.imageInformation
+        //     },
+        // }
+    });
+    $scope.submit = function () {
+        Upload.upload({
+            url: '/uploads/formPRelation/' + sessionStorage.ID + '/' + sessionStorage.FileName,
+            method: 'put',
+            data: $scope.upload
+        }).then(function (response) {
+            // console.log(response.data);
+            $scope.image.push(response.data);
+            // $scope.image = {};
+            console.log("Update")
+        })
+    }
+}]);
 
 
 
