@@ -15,6 +15,7 @@
     "tests"
   ],
   "dependencies": {
-    "ng-tags-input": "3.2.0"
+    "ng-tags-input": "3.2.0",
+    "angular-annotorious": "^1.0.7"
   }
 }

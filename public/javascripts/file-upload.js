@@ -2,7 +2,8 @@ var app = angular.module('fileUpload', [
     'ngFileUpload',
     'ngResource',
     'ngRoute',
-    'ngTagsInput'
+    'ngTagsInput',
+    'annotorious'
 ]);
 var tempFileName, tempID;
 

@@ -5,7 +5,9 @@ var paths = {
     'node_modules/ng-file-upload/dist/ng-file-upload-all.min.js',
     'node_modules/angular-resource/angular-resource.min.js',
     'node_modules/angular-route/angular-route.min.js',
-    'bower_components/ng-tags-input/ng-tags-input.min.js'],
+    'bower_components/ng-tags-input/ng-tags-input.min.js',
+    'bower_components/annotorious-bower/annotorious.min.js',
+    'bower_components/angular-annotorious/js/angular-annotorious.js'],
     
   dest: 'public/vendor/'
 };
