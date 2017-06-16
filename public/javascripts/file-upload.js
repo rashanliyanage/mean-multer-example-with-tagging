@@ -1,7 +1,8 @@
 var app = angular.module('fileUpload', [
     'ngFileUpload',
     'ngResource',
-    'ngRoute'
+    'ngRoute',
+    'ngTagsInput'
 ]);
 var tempFileName, tempID;
 
@@ -52,11 +53,11 @@ app.config(function ($routeProvider, $locationProvider) {
 
 });
 
+
+
 app.config(['$qProvider', function ($qProvider) {
     $qProvider.errorOnUnhandledRejections(false);
 }]);
-
-
 
 
 
@@ -67,10 +68,14 @@ app.controller('CtrlUpload', ['$http', 'Upload', '$scope', function ($http, Uplo
     $http.get('/uploads').then(function (response) {
         console.log(response.data);
         $scope.all = response.data;
+
+
+
+
     });
 
     $scope.submit = function () {
-        // console.log($scope.upload)
+        console.log($scope.upload);
         Upload.upload({
             url: '/uploads',
             method: 'post',
@@ -141,13 +146,34 @@ app.controller('CtrlUpdateImageInformation', ['$http', 'Upload', '$scope', '$rou
 
 
         $scope.image = response.data;
-        console.log(response.data[0].tags.imageInformation);
+        // console.log(response.data[0].tags.imageInformation);
+        $scope.tags = ["hallo", "du", "spass"
+            // { text: 'Tag1' },
+            // { text: 'Tag2' },
+            // { text: 'Tag3' }
+        ];
+        //  $scope.upload = {
+        //      tags
+        //  }
+        //   ];
+        // console.log(response.data[0].tags.imageInformation);
+        // for (var index = 0; index < upload.tags.imageInformation.artist.length; index++) {
+        //     var element = {
+        //         text: upload.tags.imageInformation.artist[0]
+        //     }
+        //     console.log(element);
+        // }
+
+
+        console.log(response.data[0].tags.imageInformation.form);
+
         $scope.upload = {
             tags: {
                 imageInformation: response.data[0].tags.imageInformation
             },
         }
     });
+
     $scope.submit = function () {
         Upload.upload({
             url: '/uploads/formImageInfo/' + sessionStorage.ID + '/' + sessionStorage.FileName,

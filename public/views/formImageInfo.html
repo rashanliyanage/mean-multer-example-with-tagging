@@ -1,60 +1,60 @@
 <div ng-controller="CtrlUpdateImageInformation">
+    <h2>Image Information</h2>
 
-    <h2>Upload</h2>
-
-    <h1>Ein Test Upload</h1>
-
-
-    <!--<img ng-src="" id="imageBox" />
-        
-        
-        
-        <script>
-            var tempID = sessionStorage.getItem("ID");
-            var tempFileName = sessionStorage.getItem("FileName");
-            console.log(tempID);
-            console.log(tempFileName);
-
-
-            document.getElementById('imageBox').src = "uploads/" + tempID + "/" + tempFileName;
-        </script>
--->
     <li ng-repeat="upload in image">
         <a ng-href='{{upload.file.path + "/" + upload.file.originalname}}'>{{upload.file.originalname}}</a></br>
-            <a href="#/uploads/update/{{upload.file.filename}}/{{upload.file.originalname}}">Update</a></br>
-            <img ng-src='{{upload.file.path + "/" + upload.file.originalname}}' />
-            
+        <a href="#/uploads/update/{{upload.file.filename}}/{{upload.file.originalname}}">Update</a></br>
+        <img ng-src='{{upload.file.path + "/" + upload.file.originalname}}' />
+
     </li>
 
 
     <form ng-submit="submit()">
-        <legend>Upload a new file here:</legend>
+        <legend>Please provide basic image information:</legend>
 
 
         <label for="artist">artist:</label>
-        <input type="text" name="artist" id="artist" ng-model="upload.tags.imageInformation.artist" />
+        <!--<input type="text" name="artist" id="artist" ng-model="upload.tags.imageInformation.artist" />-->
+        <!--<selectize config='configTrue' name="artist" id="artist" ng-model="upload.tags.imageInformation.artist"></selectize>-->
+        <tags-input ng-model="upload.tags.imageInformation.artist" use-strings="true"></tags-input>
         <br/>
 
+
         <label for="publishingYear">publishingYear:</label>
-        <input type="text" name="publishingYear" id="publishingYear" class="demo-default" ng-model="upload.tags.imageInformation.publishingYear"
-        />
+        <!--<input type="text" name="publishingYear" id="publishingYear" class="demo-default" ng-model="upload.tags.imageInformation.publishingYear"/>-->
+        <!--<selectize config='configTrue' name="publishingYear" id="publishingYear" class="demo-default" ng-model="upload.tags.imageInformation.publishingYear"></selectize>-->
+        <tags-input ng-model="upload.tags.imageInformation.publishingYear" use-strings="true"></tags-input>
+
         <br/>
 
         <label for="publishingLocation">publishingLocation:</label>
-        <input type="text" name="publishingLocation" id="publishingLocation" ng-model="upload.tags.imageInformation.publishingLocation"
-        />
+        <!--<input type="text" name="publishingLocation" id="publishingLocation" ng-model="upload.tags.imageInformation.publishingLocation"
+        />-->
+
+        <!--<selectize config='configTrue' name="publishingLocation" id="publishingLocation" ng-model="upload.tags.imageInformation.publishingLocation"></selectize>-->
+        <tags-input ng-model="upload.tags.imageInformation.publishingLocation" use-strings="true"></tags-input>
+
         <br/>
 
 
         <label for="medium">medium:</label>
-        <input type="text" name="medium" id="medium" ng-model="upload.tags.imageInformation.medium" />
+        <!--<input type="text" name="medium" id="medium" ng-model="upload.tags.imageInformation.medium" />-->
+        <!--<selectize config='configTrue' name="medium" id="medium" ng-model="upload.tags.imageInformation.medium"></selectize>-->
+        <tags-input ng-model="upload.tags.imageInformation.medium" use-strings="true"></tags-input>
+
         <br/>
 
 
 
         <label for="form">form (digital analogue):</label>
-        <input type="text" name="form" id="form" ng-model="upload.tags.imageInformation.form" />
+        <!--<input type="text" name="form" id="form" ng-model="upload.tags.imageInformation.form" />-->
+        <!--<selectize config='configTrue' name="form" id="form" ng-model="upload.tags.imageInformation.form"></selectize>-->
+        <tags-input ng-model="upload.tags.imageInformation.form" use-strings="true"></tags-input>
+
+
         <br/>
+    <label for="tags">TEST</label>
+        <tags-input ng-model="tags"></tags-input>
 
 
         <input type="submit" value="Submit" />

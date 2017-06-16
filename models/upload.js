@@ -1,13 +1,13 @@
 var mongoose = require('mongoose');
 
 // var UploadSchema = mongoose.Schema({
-//     name: String,
+//     name: Array,
 //     tags: {
-//         ImageObjects: String,
-//         CreatorArtist: String,
-//         Question1: String,
-//         Question2: String,
-//         tags: String
+//         ImageObjects: Array,
+//         CreatorArtist: Array,
+//         Question1: Array,
+//         Question2: Array,
+//         tags: Array
 //     },
 //     created: Date,
 //     file: Object
@@ -16,11 +16,11 @@ var mongoose = require('mongoose');
 
 
 var ImageInformationSchema = mongoose.Schema({
-    artist: String,
-    publishingYear: Date,
-    publishingLocation: String,
-    medium: String,
-    form: String
+    artist: Array,
+    publishingYear: Array,
+    publishingLocation: Array,
+    medium: Array,
+    form: Array
 });
 
 var ImageDescrpSchema = mongoose.Schema({
@@ -30,11 +30,11 @@ var ImageDescrpSchema = mongoose.Schema({
 });
 
 var PersonalRelationSchema = mongoose.Schema({
-    source: String,
-    placeFoundFirst: String,
-    dateFoundFirst: Date,
-    time: String,
-    Relation: String
+    source: Array,
+    placeFoundFirst: Array,
+    dateFoundFirst: Array,
+    time: Array,
+    Relation: Array
 });
 
 var TagSchema = mongoose.Schema({
@@ -44,12 +44,12 @@ var TagSchema = mongoose.Schema({
 });
 
 var UploadSchema = mongoose.Schema({
-    sessionName: String,
-    sessionIdentifier: String,
+    sessionName: Array,
+    sessionIdentifier: Array,
     tags: TagSchema,
     created: Date,
     file: Object,
-    sessionRecording: String
+    sessionRecording: Array
 });
 
 
