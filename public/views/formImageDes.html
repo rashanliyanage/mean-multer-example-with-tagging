@@ -5,18 +5,18 @@
 
     <li ng-repeat="upload in image">
         <a ng-href='{{upload.file.path + "/" + upload.file.originalname}}'>{{upload.file.originalname}}</a></br>
-        <a href="#/uploads/update/{{upload.file.filename}}/{{upload.file.originalname}}">Update</a></br>
+        <!--<a href="#/uploads/update/{{upload.file.filename}}/{{upload.file.originalname}}">Update</a></br>-->
         <img ng-src='{{upload.file.path + "/" + upload.file.originalname}}' />
 
     </li>
 
     <form ng-submit="submit()">
         <label for="motives">motives (what motives are in this image):</label>
-        <tags-input ame="motives" id="motives" ng-model="upload.tags.imageDescrp.motives" use-strings="true"></tags-input>
+        <tags-input ame="motives" id="motives" ng-model="upload.imageDescrp.motives" use-strings="true"></tags-input>
         <br/>
 
         <label for="motivesRevolution">motivesRevolution (what does it make an image of revolution):</label>
-         <tags-input name="motivesRevolution" id="motivesRevolution" ng-model="upload.tags.imageDescrp.motivesRevolution" use-strings="true"></tags-input>
+         <tags-input name="motivesRevolution" id="motivesRevolution" ng-model="upload.imageDescrp.motivesRevolution" use-strings="true"></tags-input>
         <br/>
 
         <input type="submit" value="Submit" />

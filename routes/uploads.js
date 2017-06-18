@@ -18,8 +18,13 @@ router.post('/', upload.single('file'), function (req, res, next) {
     console.log(req.body);
     var newUpload = {
         sessionName: req.body.sessionName,
-        tags: null,
         sessionIdentifier: req.body.sessionIdentifier,
+        imageInformation: null, 
+        imageDescrp: null, 
+        personalRelation: null, 
+        imageAnnotation: null, 
+        links: null, 
+        sessionRecording: null,
         created: Date.now(),
         file: req.file
 
@@ -77,14 +82,14 @@ router.post('/annotate/:uuid/:filename', upload.single(), function (req, res, ne
             'file.originalname': req.params.filename
         }, {
             $set: {
-                tags: {
-                    imageAnnotation: {
-                        src: req.body.src,
-                        text: req.body.text,
-                        shapes: req.body.shapes,
-                        context: req.body.context
-                    }
+
+                imageAnnotation: {
+                    src: req.body.src,
+                    text: req.body.text,
+                    shapes: req.body.shapes,
+                    context: req.body.context
                 }
+
             }
         },
         function (err, upload) {
@@ -104,14 +109,43 @@ router.put('/annotate/:uuid/:filename', upload.single(), function (req, res, nex
             'file.originalname': req.params.filename
         }, {
             $set: {
-                tags: {
-                    imageAnnotation: {
-                        src: req.body.src,
-                        text: req.body.text,
-                        shapes: req.body.shapes,
-                        context: req.body.context
-                    }
+
+                imageAnnotation: {
+                    src: req.body.src,
+                    text: req.body.text,
+                    shapes: req.body.shapes,
+                    context: req.body.context
+
                 }
+            }
+        },
+        function (err, upload) {
+            if (err) next(err);
+            else {
+                res.send(upload);
+            }
+        });
+});
+
+
+
+router.put('/updateImage/:uuid/:filename', upload.single(), function (req, res, next) {
+    // var huso = JSON.stringify(req.body);
+    console.log(req.body);
+    Upload.findOneAndUpdate({
+            'file.filename': req.params.uuid,
+            'file.originalname': req.params.filename
+        }, {
+            $set: {
+
+                // imageAnnotation: req.body.imageAnnotation,
+
+            sessionName: req.body.sessionName,
+            sessionIdentifier: req.body.sessionIdentifier,
+            imageInformation: req.body.imageInformation,
+            imageDescrp: req.body.imageDescrp,
+            personalRelation: req.body.personalRelation,
+
             }
         },
         function (err, upload) {
@@ -130,8 +164,8 @@ router.get('/annotate/:uuid/:filename', function (req, res, next) {
     }, function (err, upload) {
         if (err) next(err);
         else {
-            console.log(upload[0].tags.imageAnnotation);
-            res.send(upload[0].tags.imageAnnotation);
+            console.log(upload[0].imageAnnotation);
+            res.send(upload[0].imageAnnotation);
         }
     });
 });
@@ -162,14 +196,15 @@ router.put('/updateUploadData/:uuid/:filename', upload.single(), function (req, 
 
 router.put('/formImageInfo/:uuid/:filename', upload.single(), function (req, res, next) {
     // console.log(sessionStorage);
+    console.log(req.body)
     Upload.findOneAndUpdate({
             'file.filename': req.params.uuid,
             'file.originalname': req.params.filename
         }, {
             $set: {
-                tags: {
-                    imageInformation: req.body.tags.imageInformation
-                }
+
+                imageInformation: req.body.imageInformation
+
             }
         },
         function (err, upload) {
@@ -188,9 +223,9 @@ router.put('/formImageDes/:uuid/:filename', upload.single(), function (req, res,
             'file.originalname': req.params.filename
         }, {
             $set: {
-                tags: {
-                    imageDescrp: req.body.tags.imageDescrp
-                }
+
+                    imageDescrp: req.body.imageDescrp
+
             }
         },
         function (err, upload) {
@@ -209,10 +244,10 @@ router.put('/formImageDesLocation/:uuid/:filename', upload.single(), function (r
             'file.originalname': req.params.filename
         }, {
             $set: {
-                tags: {
+
                     imageDescrp: {
-                        revolutionLocation: req.body.tags.imageDescrp.revolutionLocation
-                    }
+                        revolutionLocation: req.body.imageDescrp.revolutionLocation
+
                 }
             }
         },
@@ -232,9 +267,9 @@ router.put('/formPRelation/:uuid/:filename', upload.single(), function (req, res
             'file.originalname': req.params.filename
         }, {
             $set: {
-                tags: {
-                    personalRelation: req.body.tags.personalRelation
-                }
+
+                    personalRelation: req.body.personalRelation
+
             }
         },
         function (err, upload) {

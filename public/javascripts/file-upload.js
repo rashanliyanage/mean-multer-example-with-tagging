@@ -169,9 +169,9 @@ app.controller('CtrlUpdateImageInformation', ['$http', 'Upload', '$scope', '$rou
         }
         //   ];
         // console.log(response.data[0].tags.imageInformation);
-        // for (var index = 0; index < upload.tags.imageInformation.artist.length; index++) {
+        // for (var index = 0; index < uploadimageInformation.artist.length; index++) {
         //     var element = {
-        //         text: upload.tags.imageInformation.artist[0]
+        //         text: uploadimageInformation.artist[0]
         //     }
         //     console.log(element);
         // }
@@ -187,6 +187,7 @@ app.controller('CtrlUpdateImageInformation', ['$http', 'Upload', '$scope', '$rou
     });
 
     $scope.submit = function () {
+        console.log($scope.upload);
         Upload.upload({
             url: '/uploads/formImageInfo/' + sessionStorage.ID + '/' + sessionStorage.FileName,
             method: 'put',
@@ -243,17 +244,7 @@ app.controller('CtrlUpdateImageDescripLoc', ['$http', 'Upload', '$scope', '$rout
     $http.get('/uploads/image/' + sessionStorage.ID + '/' + sessionStorage.FileName).then(function (response) {
         console.log(response.data);
         $scope.image = response.data;
-        annotoriousService.reset();
-        anno.addPlugin('VanillaREST', {
-            'prefix': '/uploads',
-            'urls': {
-                read: '/',
-                create: '/annotate/' + $routeParams.uuid + '/' + $routeParams.filename,
-                update: '/annotate/' + $routeParams.uuid + '/' + $routeParams.filename,
-                destroy: '/',
-                search: '/'
-            }
-        })
+ 
         // console.log(response.data[0].tags.imageInformation);
         // $scope.upload = {
         //     tags: {
@@ -261,6 +252,18 @@ app.controller('CtrlUpdateImageDescripLoc', ['$http', 'Upload', '$scope', '$rout
         //     },
         // }
     });
+
+        //    annotoriousService.reset();
+        anno.addPlugin('VanillaREST', {
+            'prefix': '/uploads',
+            'urls': {
+                read: '/',
+                create: '/annotate/' + sessionStorage.ID + '/' + sessionStorage.FileName,
+                update: '/annotate/' + sessionStorage.ID + '/' + sessionStorage.FileName,
+                destroy: '/',
+                search: '/'
+            }
+        })
     // $scope.submit = function () {
     //     Upload.upload({
     //         url: '/uploads/formImageDesLocation/' + sessionStorage.ID + '/' + sessionStorage.FileName,
@@ -338,6 +341,9 @@ app.controller('CtrlUpdatePersonalRelationSub', ['$http', 'Upload', '$scope', '$
             console.log("Update")
         })
     }
+
+
+
 }]);
 
 
@@ -405,10 +411,15 @@ app.controller('formCtrlImage', ['$http', 'Upload', '$scope', '$routeParams', fu
 
 
     $http.get('/uploads/image/' + $routeParams.uuid + '/' + $routeParams.filename).then(function (response) {
-        console.log(response.data);
+        console.log(response.data[0].sessionIdentifier);
         $scope.image = response.data;
         $scope.upload = {
-            tags: response.data.tags
+            sessionName: response.data[0].sessionName,
+            sessionIdentifier: response.data[0].sessionIdentifier,
+            imageInformation: response.data[0].imageInformation,
+            imageDescrp: response.data[0].imageDescrp,
+            personalRelation: response.data[0].personalRelation,
+            // response.data.
         }
 
         // anno.addPlugin('VanillaREST', {
@@ -422,4 +433,30 @@ app.controller('formCtrlImage', ['$http', 'Upload', '$scope', '$routeParams', fu
         //     }
         // })
     });
+
+
+            anno.addPlugin('VanillaREST', {
+            'prefix': '/uploads',
+            'urls': {
+                read: '/',
+                create: '/annotate/' + sessionStorage.ID + '/' + sessionStorage.FileName,
+                update: '/annotate/' + sessionStorage.ID + '/' + sessionStorage.FileName,
+                destroy: '/',
+                search: '/'
+            }
+        })
+
+
+            $scope.submit = function () {
+        Upload.upload({
+            url: '/uploads/updateImage/' + $routeParams.uuid + '/' + $routeParams.filename,
+            method: 'put',
+            data: $scope.upload
+        }).then(function (response) {
+            // console.log(response.data);
+            $scope.image.push(response.data);
+            // $scope.image = {};
+            console.log("Update")
+        })
+    }
 }]);

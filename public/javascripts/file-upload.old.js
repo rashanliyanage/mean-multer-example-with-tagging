@@ -161,9 +161,9 @@ app.controller('CtrlUpdateImageInformation', ['$http', 'Upload', '$scope', '$rou
         //  }
         //   ];
         // console.log(response.data[0].tags.imageInformation);
-        // for (var index = 0; index < upload.tags.imageInformation.artist.length; index++) {
+        // for (var index = 0; index < uploadimageInformation.artist.length; index++) {
         //     var element = {
-        //         text: upload.tags.imageInformation.artist[0]
+        //         text: uploadimageInformation.artist[0]
         //     }
         //     console.log(element);
         // }

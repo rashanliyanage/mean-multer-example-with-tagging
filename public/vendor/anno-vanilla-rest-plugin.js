@@ -117,7 +117,7 @@ annotorious.plugin.VanillaREST = (function () {
         //     annotation.id = response['id'];
         // })
 
-        // console.log(this._getAnnotationData(annotation));
+        console.log(annotation);
         var self = this;
         jQuery.ajax({
                 url: this._getActionUrl('create', null),
