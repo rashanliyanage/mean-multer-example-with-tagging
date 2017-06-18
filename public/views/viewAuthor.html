@@ -1,7 +1,7 @@
 <div ng-controller="formCtrlAuthor" id="example-form" action="#">
-    <h2>All uploads are here:</h2>
     <ul>
         <li ng-repeat="upload in author">
+                <h2>All uploads by {{upload.sessionName[0]}} are here</h2>
             <!--<h2>Upload By</h2>
                 <p>{{upload.name}}</p>
                 <h2>CreatorArtist</h2>
@@ -11,10 +11,10 @@
                  <h2>All</h2>
                 <p>{{upload}}</p>-->
 
-            <a ng-href='{{upload.file.path + "/" + upload.file.originalname}}'>{{upload.file.originalname}}</a></br>
+            <!--<a ng-href='{{upload.file.path + "/" + upload.file.originalname}}'>{{upload.file.originalname}}</a></br>-->
             <a href="#/uploads/image/{{upload.file.filename}}/{{upload.file.originalname}}">Info to images</a></br>
             <img ng-src='{{upload.file.path + "/" + upload.file.originalname}}' />
-            <a </li>
+            </li>
     </ul>
 
 </div>

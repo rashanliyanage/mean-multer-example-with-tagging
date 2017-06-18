@@ -11,15 +11,12 @@
     </li>
 
     <form ng-submit="submit()">
-        <legend>Upload a new file here:</legend>
-
         <label for="motives">motives (what motives are in this image):</label>
-        <input type="text" name="motives" id="motives" ng-model="upload.tags.imageDescrp.motives" />
+        <tags-input ame="motives" id="motives" ng-model="upload.tags.imageDescrp.motives" use-strings="true"></tags-input>
         <br/>
 
         <label for="motivesRevolution">motivesRevolution (what does it make an image of revolution):</label>
-        <input type="text" name="motivesRevolution" id="motivesRevolution" class="demo-default" ng-model="upload.tags.imageDescrp.motivesRevolution"
-        />
+         <tags-input name="motivesRevolution" id="motivesRevolution" ng-model="upload.tags.imageDescrp.motivesRevolution" use-strings="true"></tags-input>
         <br/>
 
         <input type="submit" value="Submit" />

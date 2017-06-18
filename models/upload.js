@@ -33,22 +33,40 @@ var PersonalRelationSchema = mongoose.Schema({
     source: Array,
     placeFoundFirst: Array,
     dateFoundFirst: Array,
-    time: Array,
-    Relation: Array
+    time: Array
+});
+
+var imageAnnotationSchema = mongoose.Schema({
+    src: String,
+    text: String,
+    shapes: Array,
+    context: String,
+    type: String,
+    id: String
+});
+
+var linksSchema = mongoose.Schema({
+    stuff: Array
 });
 
 var TagSchema = mongoose.Schema({
     imageInformation: ImageInformationSchema,
     imageDescrp: ImageDescrpSchema,
-    personalRelation: PersonalRelationSchema
+    personalRelation: PersonalRelationSchema,
+    imageAnnotation: imageAnnotationSchema,
+    links: linksSchema
 });
 
 var UploadSchema = mongoose.Schema({
     sessionName: Array,
     sessionIdentifier: Array,
-    tags: TagSchema,
     created: Date,
     file: Object,
+    imageInformation: ImageInformationSchema,
+    imageDescrp: ImageDescrpSchema,
+    personalRelation: PersonalRelationSchema,
+    imageAnnotation: imageAnnotationSchema,
+    links: linksSchema,
     sessionRecording: Array
 });
 

@@ -7,7 +7,6 @@ var upload = multer({
     dest: 'uploads/'
 });
 var author;
-var _ = require('underscore');
 
 
 /**
@@ -68,6 +67,76 @@ router.post('/', upload.single('file'), function (req, res, next) {
 //             }
 //         });
 // });
+
+
+router.post('/annotate/:uuid/:filename', upload.single(), function (req, res, next) {
+    // var huso = JSON.parse(req.body);
+    console.log(req.body);
+    Upload.findOneAndUpdate({
+            'file.filename': req.params.uuid,
+            'file.originalname': req.params.filename
+        }, {
+            $set: {
+                tags: {
+                    imageAnnotation: {
+                        src: req.body.src,
+                        text: req.body.text,
+                        shapes: req.body.shapes,
+                        context: req.body.context
+                    }
+                }
+            }
+        },
+        function (err, upload) {
+            if (err) next(err);
+            else {
+                res.send(upload);
+            }
+        });
+});
+
+
+router.put('/annotate/:uuid/:filename', upload.single(), function (req, res, next) {
+    // var huso = JSON.stringify(req.body);
+    console.log(req.body);
+    Upload.findOneAndUpdate({
+            'file.filename': req.params.uuid,
+            'file.originalname': req.params.filename
+        }, {
+            $set: {
+                tags: {
+                    imageAnnotation: {
+                        src: req.body.src,
+                        text: req.body.text,
+                        shapes: req.body.shapes,
+                        context: req.body.context
+                    }
+                }
+            }
+        },
+        function (err, upload) {
+            if (err) next(err);
+            else {
+                res.send(upload);
+            }
+        });
+});
+
+router.get('/annotate/:uuid/:filename', function (req, res, next) {
+    console.log(req.params);
+    Upload.find({
+        'file.filename': req.params.uuid,
+        'file.originalname': req.params.filename
+    }, function (err, upload) {
+        if (err) next(err);
+        else {
+            console.log(upload[0].tags.imageAnnotation);
+            res.send(upload[0].tags.imageAnnotation);
+        }
+    });
+});
+
+
 router.put('/updateUploadData/:uuid/:filename', upload.single(), function (req, res, next) {
     console.log(req.body);
     Upload.findOneAndUpdate({
@@ -191,7 +260,6 @@ router.get('/', function (req, res, next) {
 
 
 router.get('/sessions', function (req, res, next) {
-    console.log("logged")
     Upload.find().distinct('sessionName', function (err, upload) {
         if (err) {
             next(err);
@@ -236,10 +304,12 @@ router.get('/topics', function (req, res, next) {
  * Gets the list of all files from the database with name
  */
 router.get('/:author', function (req, res, next) {
+    console.log(req.params.author);
     author = req.params.author;
     Upload.find({
         'sessionName': req.params.author
     }, function (err, upload) {
+        console.log(upload)
         if (err) next(err);
         else {
             res.send(upload);
